@@ -161,6 +161,7 @@ Apply changes:
 ## Screenshots
 
 ![Dashboard Screenshot](dashboard_screenshot.png)
+![Vnstat Backup Page Screenshot](vnstat_backup.png)
 
 ## About
 
