@@ -165,11 +165,14 @@ Apply changes:
 ![OpenWrt LuCI Realtime Dashboard System Monitoring Interface](dashboard_screenshot.png)
 ![OpenWrt LuCI vnStat Backup Manager Plugin Panel](vnstat_backup.png)
 
-## About
-
-Real-time dashboard and vnStat database backup manager for OpenWrt LuCI.
-
+---
 
 ### License
 
 MIT License
+
+---
+
+## See Also
+* [luci-app-client-monitor](https://github.com/OppsError404/luci-app-client-monitor) - Realtime per-client bandwidth usage and traffic monitor.
+
