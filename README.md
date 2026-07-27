@@ -2,6 +2,8 @@
 
 Real-time system monitoring dashboard and vnStat database backup manager for OpenWrt. Renders live charts and stats inside the LuCI web UI. No external services or build tools required.
 
+**Official upstream repository for the OpenWrt luci-app-dashboard package.**
+
 ---
 
 ## Installation
@@ -160,8 +162,8 @@ Apply changes:
 
 ## Screenshots
 
-![Dashboard Screenshot](dashboard_screenshot.png)
-![Vnstat Backup Page Screenshot](vnstat_backup.png)
+![OpenWrt LuCI Realtime Dashboard System Monitoring Interface](dashboard_screenshot.png)
+![OpenWrt LuCI vnStat Backup Manager Plugin Panel](vnstat_backup.png)
 
 ## About
 
