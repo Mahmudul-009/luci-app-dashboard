@@ -6,6 +6,23 @@ Real-time system monitoring dashboard and vnStat database backup manager for Ope
 
 ---
 
+## Quick Start
+
+1) Install the package for your OpenWrt version (see Compatibility Matrix below).  
+2) Restart service:
+
+```bash
+/etc/init.d/dashboard restart
+```
+
+3) Open LuCI page:
+
+```
+/cgi-bin/luci/admin/services/dashboard
+```
+
+---
+
 ## Installation
 
 ### For OpenWrt v25.12 or newer (.apk)
@@ -23,6 +40,13 @@ opkg update && \wget --no-check-certificate -O /tmp/luci-app-dashboard.ipk "http
 opkg install /tmp/luci-app-dashboard.ipk && \
 rm -f /tmp/luci-app-dashboard.ipk
 ```
+
+### Compatibility Matrix
+
+| OpenWrt Version | Package Format | Installer |
+|---|---|---|
+| v25.12 or newer | `.apk` | `apk` |
+| v24.10.5 or older | `.ipk` | `opkg` |
 
 ## Uninstallation
 
@@ -84,6 +108,19 @@ Navigate to **Services → Dashboard** in the LuCI menu.
 /etc/init.d/dashboard vnstat_restore          # Immediate restore
 ```
 
+### CLI Examples (Expected Outcome)
+
+```bash
+/etc/init.d/dashboard status
+# Expected: dashboard service state + feature enable/disable status
+
+/etc/init.d/dashboard vnstat_backup
+# Expected: backup file created/updated under /etc/vnstat/backup/
+
+/etc/init.d/dashboard vnstat_restore
+# Expected: latest backup restored to vnStat DB location
+```
+
 ### Global CLI Shims
 
 ```bash
@@ -102,7 +139,7 @@ config dashboard 'settings'
     option vnstat   '1'     # Show vnStat traffic card (0/1)
     option adblock  '1'     # Show Adblock status card (0/1)
     option vnstat_db '0'    # Enable automatic vnStat DB backups (0/1)
-    option multi_core '1'   # Manaually enable/disable per core graph (0/1)
+    option multi_core '1'   # Manually enable/disable per-core graph (0/1)
 ```
 
 Apply changes:
@@ -110,6 +147,17 @@ Apply changes:
 ```bash
 /etc/init.d/dashboard restart
 ```
+
+### Feature Toggle Behavior
+
+| Option | Value | Behavior |
+|---|---|---|
+| `vnstat` | `0` | vnStat traffic card is hidden |
+| `adblock` | `0` | Adblock status card is hidden |
+| `multi_core` | `0` | Per-core CPU graph is disabled (overall CPU still shown) |
+| `vnstat_db` | `0` | Scheduled 12h vnStat backup is disabled |
+
+If optional packages are not installed, related cards/features should be treated as unavailable.
 
 ---
 
@@ -160,6 +208,64 @@ Apply changes:
 
 ---
 
+## Troubleshooting
+
+- **Dashboard page opens but cards are blank**
+  - Restart service: `/etc/init.d/dashboard restart`
+  - Check API endpoint response: `/cgi-bin/luci/admin/status/dashboard`
+- **No vnStat data shown**
+  - Ensure `vnstat2` is installed and `vnstatd` is running.
+  - Wait until traffic data accumulates.
+- **Adblock card not visible or empty**
+  - Ensure `adblock` package is installed.
+  - Enable card: `/etc/init.d/dashboard adblock_enable`
+- **Backup command fails**
+  - Verify write access to `/etc/vnstat/backup/`
+  - Ensure vnStat DB path exists and service is running.
+
+---
+
+## Migration Notes (v24 `.ipk` → v25 `.apk`)
+
+1) Remove old package:
+
+```bash
+opkg remove luci-app-dashboard
+```
+
+2) Install new package format on newer OpenWrt:
+
+```bash
+apk add --allow-untrusted /tmp/luci-app-dashboard.apk
+```
+
+3) Restart service and verify LuCI URL:
+
+```bash
+/etc/init.d/dashboard restart
+```
+
+---
+
+## Changelog
+
+- **v2.0.0-r4**
+  - Added OpenWrt split install path guidance (`apk` vs `opkg`)
+  - Documented vnStat backup/restore commands and behavior
+  - README structure improvements for faster setup
+
+---
+
+## Planned Roadmap (Top 5 Priorities)
+
+1) API failure fallback messages (avoid blank cards)  
+2) Auto-detect unavailable optional packages and show `Not Installed` state  
+3) Backup/restore last result with clear error reason in UI  
+4) User-configurable dashboard refresh interval  
+5) Health-check JSON endpoint for monitoring integrations  
+
+---
+
 ## Screenshots
 
 ![OpenWrt LuCI Realtime Dashboard System Monitoring Interface](dashboard_screenshot.png)
@@ -175,4 +281,3 @@ MIT License
 
 ## See Also
 * [luci-app-client-monitor](https://github.com/OppsError404/luci-app-client-monitor) - Realtime per-client bandwidth usage and traffic monitor.
-
