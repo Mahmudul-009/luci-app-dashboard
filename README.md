@@ -8,7 +8,7 @@ Real-time system monitoring dashboard and vnStat database backup manager for Ope
 
 ## Quick Start
 
-1) Install the package for your OpenWrt version (see Compatibility Matrix below).  
+1) Install the package for your OpenWrt version (see Compatibility Matrix below).
 2) Restart service:
 
 ```bash
@@ -258,10 +258,10 @@ apk add --allow-untrusted /tmp/luci-app-dashboard.apk
 
 ## Planned Roadmap (Top 5 Priorities)
 
-1) API failure fallback messages (avoid blank cards)  
-2) Auto-detect unavailable optional packages and show `Not Installed` state  
-3) Backup/restore last result with clear error reason in UI  
-4) User-configurable dashboard refresh interval  
+1) API failure fallback messages (avoid blank cards)
+2) Auto-detect unavailable optional packages and show `Not Installed` state
+3) Backup/restore last result with clear error reason in UI
+4) User-configurable dashboard refresh interval
 5) Health-check JSON endpoint for monitoring integrations  
 
 ---
