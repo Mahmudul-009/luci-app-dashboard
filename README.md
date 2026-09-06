@@ -266,6 +266,44 @@ apk add --allow-untrusted /tmp/luci-app-dashboard.apk
 
 ---
 
+## Requested Feature Backlog
+
+1) **Top Bandwidth Users**
+   - Per-device traffic ranking (hour/day/month)
+   - Suggested dependency: `nlbwmon` or host-level vnStat mapping
+
+2) **Priority Device Profiles**
+   - Device priority modes (gaming, browsing, download)
+   - Suggested integration: QoS/SQM + DSCP/traffic shaping rules
+
+3) **Parental Control**
+   - Device-wise schedule, website/app category block, time limits
+   - Suggested integration: DNS-based filtering + firewall rules
+
+4) **Downloadable Reports (PDF/CSV)**
+   - Daily/weekly/monthly report export from dashboard metrics
+   - Include traffic, uptime, latency, and device usage summaries
+
+5) **Per-Service Usage (Facebook/YouTube/etc.)**
+   - App/domain-wise traffic split by known services
+   - Requires DNS/domain correlation or DPI-capable backend
+
+6) **ISP Performance Score**
+   - Scheduled tests for latency, jitter, packet loss
+   - Hourly/daily scoring and trend chart for ISP quality
+
+7) **Bufferbloat Test**
+   - Measure latency under download/upload load
+   - Show before/under-load RTT delta and quality grade
+
+### Feasibility Notes
+
+- Items 1, 2, 3 are generally achievable on OpenWrt with existing ecosystem packages.
+- Items 5, 6, 7 require additional measurement/classification logic and may be hardware-sensitive on low-resource routers.
+- Recommended delivery: phase-wise rollout (stats → QoS controls → testing/scoring → export/reporting).
+
+---
+
 ## Screenshots
 
 ![OpenWrt LuCI Realtime Dashboard System Monitoring Interface](dashboard_screenshot.png)
