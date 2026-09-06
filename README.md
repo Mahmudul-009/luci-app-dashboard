@@ -268,6 +268,12 @@ apk add --allow-untrusted /tmp/luci-app-dashboard.apk
 
 ## Requested Feature Backlog
 
+### Planned Separate Option in LuCI
+
+- Add a dedicated menu option: **Services → Dashboard → Advanced Tools** (planned)
+- Keep current dashboard unchanged; advanced items live in this separate section
+- Each item will have its own enable/disable toggle and status panel
+
 1) **Top Bandwidth Users**
    - Per-device traffic ranking (hour/day/month)
    - Suggested dependency: `nlbwmon` or host-level vnStat mapping
@@ -295,6 +301,7 @@ apk add --allow-untrusted /tmp/luci-app-dashboard.apk
 7) **Bufferbloat Test**
    - Measure latency under download/upload load
    - Show before/under-load RTT delta and quality grade
+   - Planned location: Advanced Tools → Bufferbloat Test
 
 ### Feasibility Notes
 
